@@ -1,0 +1,144 @@
+package com.pactera.empty.base.activity;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
+
+import com.pactera.empty.base.pojo.EventMessage;
+import com.pactera.empty.base.utils.ScreenUtils;
+import com.sum.empty.R;
+import com.pactera.empty.base.dialog.LoadingDialog;
+import com.pactera.empty.base.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
+
+/**
+ * @author liujiang
+ * Desc:基类
+ */
+public abstract class BaseFragment<V extends ViewBinding> extends Fragment {
+    private LoadingDialog loadDialog = null;
+
+    protected AppCompatActivity activity;
+
+    public abstract void initView(Bundle savedInstanceState);
+
+    protected V viewBinding;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (AppCompatActivity) context;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Type superclass = getClass().getGenericSuperclass();
+        Class<?> aClass = (Class<?>) ((ParameterizedType) superclass).getActualTypeArguments()[0];
+        try {
+            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class,ViewGroup.class,boolean.class);
+            viewBinding = (V) method.invoke(null, getLayoutInflater(),container,false);
+        } catch (NoSuchMethodException | IllegalAccessException| InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return viewBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(savedInstanceState);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventMessage event) {
+        onEvent(event);
+    }
+
+    /**
+     * 复写此方法接收eventBus消息
+     * @param event
+     */
+    protected void onEvent(EventMessage event) {
+
+    }
+
+    /**
+     * 弹出进度条弹窗
+     *
+     * @param msg
+     */
+    protected void showDialog(String msg) {
+        if (!TextUtils.isEmpty(msg))
+            setDialog(msg);
+        else
+            setDialog(getResources().getString(R.string.loading));
+    }
+
+    /**
+     * 隐藏进度条弹窗
+     *
+     * @param msg
+     */
+    protected void hintDialog(String msg) {
+        if (!TextUtils.isEmpty(msg))
+            ToastUtils.showShort(msg);
+        // 取消加载对话框
+        if (loadDialog != null) {
+            loadDialog.cancel();
+            loadDialog = null;
+        }
+    }
+
+    /**
+     * 设置进度条
+     */
+    private void setDialog(String text) {
+        // 正在加载对话框
+        if (loadDialog == null) {
+            loadDialog = new LoadingDialog(getActivity(), text);
+        } else {
+            loadDialog.setText(text);
+        }
+        loadDialog.getWindow().setDimAmount(0.4f);
+        loadDialog.show();
+        WindowManager.LayoutParams params = loadDialog.getWindow().getAttributes();
+        params.width = ScreenUtils.getScreenWidth() / 2;
+        params.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+        loadDialog.getWindow().setAttributes(params);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);
+
+    }
+} 
