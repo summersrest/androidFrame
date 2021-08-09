@@ -3,7 +3,9 @@ package com.pactera.empty.base.dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.TextView;
-import com.sum.empty.R;
+
+import com.pactera.empty.R;
+
 import androidx.appcompat.app.AlertDialog;
 
 /**

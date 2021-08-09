@@ -12,11 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
+import com.pactera.empty.R;
 import com.pactera.empty.base.http.HttpUtils;
 import com.pactera.empty.base.pojo.EventMessage;
 import com.pactera.empty.base.utils.ScreenUtils;
 import com.pactera.empty.base.utils.WorkUtils;
-import com.sum.empty.R;
 import com.pactera.empty.base.dialog.LoadingDialog;
 import com.pactera.empty.base.utils.ToastUtils;
 

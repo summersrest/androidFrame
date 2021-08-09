@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.pactera.empty.R;
 import com.pactera.empty.base.pojo.EventMessage;
 import com.pactera.empty.base.utils.ScreenUtils;
-import com.sum.empty.R;
 import com.pactera.empty.base.dialog.LoadingDialog;
 import com.pactera.empty.base.utils.ToastUtils;
 

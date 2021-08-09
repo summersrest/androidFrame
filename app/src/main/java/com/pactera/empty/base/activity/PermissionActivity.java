@@ -4,7 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.sum.empty.R;
+import com.pactera.empty.R;
 
 import java.util.List;
 

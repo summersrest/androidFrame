@@ -5,10 +5,10 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.classic.common.MultipleStatusView;
+import com.pactera.empty.R;
 import com.pactera.empty.base.mvp.BaseModel;
 import com.pactera.empty.base.mvp.BasePresenter;
 import com.pactera.empty.base.mvp.BaseView;
-import com.sum.empty.R;
 import com.pactera.empty.base.utils.ToastUtils;
 
 import androidx.annotation.NonNull;
