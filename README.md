@@ -5,19 +5,13 @@
 
 [查看Wiki请戳这里](https://github.com/liujiang5/androidFrame/wiki)
 
-> 网络请求
-
-> 弹窗视图
-
-> 定时器
-
-> 权限申请
-
-> 全局消息
-
-> RecyclerView
-
-> Adapter
+> 网络请求  
+弹窗视图  
+定时器  
+权限申请  
+全局消息  
+RecyclerView  
+Adapter  
 
 
 ## 架构图
