@@ -283,7 +283,7 @@ public class ActivityUtils {
     }
 
     /**
-     * 启动一个Activity并关清空所有Activity
+     * 启动一个Activity并清空所有Activity
      *
      * @param activity 当前Activity
      * @param cls      要启动的Activity

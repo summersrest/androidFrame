@@ -30,22 +30,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
 
+import static com.pactera.empty.base.utils.FastDoubleClick.isFastDoubleClick;
+
 /**
  * @author liujiang
  * Desc:基类
  */
-public abstract class BaseFragment<V extends ViewBinding> extends Fragment {
+public abstract class BaseFragment<V extends ViewBinding> extends Fragment implements View.OnClickListener {
     private LoadingDialog loadDialog = null;
 
     protected AppCompatActivity activity;
+
+    protected Context context;
 
     public abstract void initView(Bundle savedInstanceState);
 
     protected V viewBinding;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         activity = (AppCompatActivity) context;
+        this.context = context;
     }
 
     @Nullable
@@ -141,4 +146,19 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment {
             EventBus.getDefault().unregister(this);
 
     }
-} 
+
+    @Override
+    public void onClick(View v) {
+        if (isFastDoubleClick()) {
+            return;
+        }
+        onClickEvent(v);
+    }
+
+    /**
+     * 点击事件
+     */
+    protected void onClickEvent(View v) {
+
+    }
+}

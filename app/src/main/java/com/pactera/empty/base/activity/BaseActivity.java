@@ -15,6 +15,8 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.pactera.empty.R;
 import com.pactera.empty.base.http.HttpUtils;
 import com.pactera.empty.base.pojo.EventMessage;
+import com.pactera.empty.base.utils.FastDoubleClick;
+import com.pactera.empty.base.utils.L;
 import com.pactera.empty.base.utils.ScreenUtils;
 import com.pactera.empty.base.utils.WorkUtils;
 import com.pactera.empty.base.dialog.LoadingDialog;
@@ -30,11 +32,13 @@ import java.lang.reflect.Type;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
+import static com.pactera.empty.base.utils.FastDoubleClick.isFastDoubleClick;
+
 /**
  * @author liujiang
  * Desc:基类
  */
-public abstract class BaseActivity<V extends ViewBinding> extends PermissionActivity {
+public abstract class BaseActivity<V extends ViewBinding> extends PermissionActivity implements View.OnClickListener {
     private LoadingDialog loadDialog = null;
 
     public abstract void initView(Bundle savedInstanceState);
@@ -213,6 +217,23 @@ public abstract class BaseActivity<V extends ViewBinding> extends PermissionActi
     }
 
 
+    @Override
+    public void onClick(View v) {
+        //防止重复点击
+        if (isFastDoubleClick()) {
+            return;
+        }
+        onClickEvent(v);
+    }
+
+    /**
+     * 点击事件，复写此方法
+     */
+    protected void onClickEvent(View v) {
+
+    }
+
+
     /**
      * 设置点击软键盘以外的地方，软键盘消失
      */
@@ -235,22 +256,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends PermissionActi
         return onTouchEvent(ev);
     }
 
-    /**
-     * 防止重复点击
-     *
-     * @return
-     */
-    private long lastClickTime;
 
-    public boolean isFastDoubleClick() {
-        long time = System.currentTimeMillis();
-        long timeD = time - lastClickTime;
-        if (0 < timeD && timeD < 1000) {
-            return true;
-        }
-        lastClickTime = time;
-        return false;
-    }
 
     @Override
     protected void onStart() {
@@ -263,10 +269,9 @@ public abstract class BaseActivity<V extends ViewBinding> extends PermissionActi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this))
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
-        HttpUtils.instance().cancelTag(context);
-
+        }
     }
 
     @Override

@@ -17,7 +17,7 @@ import androidx.viewbinding.ViewBinding;
  * @author liujiang
  * Desc: 基类mvp
  */
-public abstract class BaseMvpActivity<V extends ViewBinding, P extends BasePresenter<BaseModel, BaseView>> extends BaseActivity<V> implements BaseView {
+public abstract class BaseMvpActivity<V extends ViewBinding, P extends BasePresenter> extends BaseActivity<V> implements BaseView {
     protected P presenter;
 
     public abstract P createPresenter();

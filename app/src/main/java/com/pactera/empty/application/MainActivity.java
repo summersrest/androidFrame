@@ -10,4 +10,5 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     public void initView(Bundle savedInstanceState) {
 
     }
+
 }

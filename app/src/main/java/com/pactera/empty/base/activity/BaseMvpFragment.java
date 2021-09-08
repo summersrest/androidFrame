@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.classic.common.MultipleStatusView;
 import com.pactera.empty.R;
+import com.pactera.empty.base.http.HttpUtils;
 import com.pactera.empty.base.mvp.BaseModel;
 import com.pactera.empty.base.mvp.BasePresenter;
 import com.pactera.empty.base.mvp.BaseView;
@@ -19,7 +20,7 @@ import androidx.viewbinding.ViewBinding;
  * @author liujiang
  * Desc:基类mvp
  */
-public abstract class BaseMvpFragment<V extends ViewBinding, P extends BasePresenter<BaseModel, BaseView>> extends BaseFragment<V> implements BaseView {
+public abstract class BaseMvpFragment<V extends ViewBinding, P extends BasePresenter> extends BaseFragment<V> implements BaseView {
     protected P presenter;
 
     public abstract P createPresenter();
@@ -126,6 +127,15 @@ public abstract class BaseMvpFragment<V extends ViewBinding, P extends BasePrese
     @Override
     public void showEmpty() {
         getMultipleStatusView().showEmpty();
+    }
+
+    /**
+     * 取消网络请求
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        HttpUtils.instance().cancelTag(context);
     }
 }
 
