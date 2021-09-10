@@ -47,7 +47,7 @@ dependencies {
     //fastjson
     implementation 'com.alibaba:fastjson:1.2.73'
     //多状态View
-    implementation 'com.classic.common:multiple-status-view:1.7'
+    implementation 'com.github.summersrest:MultipleStatusView:v1.0.0'
     //eventbus
     implementation 'org.greenrobot:eventbus:3.2.0'
     //沉浸式状态栏

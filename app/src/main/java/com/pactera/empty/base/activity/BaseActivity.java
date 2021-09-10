@@ -41,7 +41,9 @@ import static com.pactera.empty.base.utils.FastDoubleClick.isFastDoubleClick;
 public abstract class BaseActivity<V extends ViewBinding> extends PermissionActivity implements View.OnClickListener {
     private LoadingDialog loadDialog = null;
 
-    public abstract void initView(Bundle savedInstanceState);
+    protected abstract void initView(Bundle savedInstanceState);
+
+    protected abstract V getViewBinding();
 
     protected V viewBinding;
 
@@ -49,18 +51,25 @@ public abstract class BaseActivity<V extends ViewBinding> extends PermissionActi
 
     protected AppCompatActivity activity;
 
+    /**
+     * 也可以选择反射的方式完成ViewBinding，牺牲一点运行效率，增加编码便捷性
+     * 是否使用反射，个人选择
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Type superclass = getClass().getGenericSuperclass();
-        Class<?> aClass = (Class<?>) ((ParameterizedType) superclass).getActualTypeArguments()[0];
-        try {
-            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class);
-            viewBinding = (V) method.invoke(null, getLayoutInflater());
-            setContentView(viewBinding.getRoot());
-        } catch (NoSuchMethodException | IllegalAccessException| InvocationTargetException e) {
-            e.printStackTrace();
-        }
+//        Type superclass = getClass().getGenericSuperclass();
+//        Class<?> aClass = (Class<?>) ((ParameterizedType) superclass).getActualTypeArguments()[0];
+//        try {
+//            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class);
+//            viewBinding = (V) method.invoke(null, getLayoutInflater());
+//            setContentView(viewBinding.getRoot());
+//        } catch (NoSuchMethodException | IllegalAccessException| InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
+
+        viewBinding = getViewBinding();
+        setContentView(viewBinding.getRoot());
         context = this;
         activity = this;
         //设置沉浸式状态栏

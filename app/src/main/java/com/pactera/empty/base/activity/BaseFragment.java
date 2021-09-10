@@ -46,6 +46,8 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     public abstract void initView(Bundle savedInstanceState);
 
     protected V viewBinding;
+
+    protected abstract V getViewBinding();
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -53,17 +55,22 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
         this.context = context;
     }
 
+    /**
+     * 也可以选择反射的方式完成ViewBinding，牺牲一点运行效率，增加编码便捷性
+     * 是否使用反射，个人选择
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Type superclass = getClass().getGenericSuperclass();
-        Class<?> aClass = (Class<?>) ((ParameterizedType) superclass).getActualTypeArguments()[0];
-        try {
-            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class,ViewGroup.class,boolean.class);
-            viewBinding = (V) method.invoke(null, getLayoutInflater(),container,false);
-        } catch (NoSuchMethodException | IllegalAccessException| InvocationTargetException e) {
-            e.printStackTrace();
-        }
+//        Type superclass = getClass().getGenericSuperclass();
+//        Class<?> aClass = (Class<?>) ((ParameterizedType) superclass).getActualTypeArguments()[0];
+//        try {
+//            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class,ViewGroup.class,boolean.class);
+//            viewBinding = (V) method.invoke(null, getLayoutInflater(),container,false);
+//        } catch (NoSuchMethodException | IllegalAccessException| InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
+        viewBinding = getViewBinding();
         return viewBinding.getRoot();
     }
 
