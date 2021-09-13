@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.pactera.empty.R;
 import com.pactera.empty.base.pojo.EventMessage;
+import com.pactera.empty.base.utils.L;
 import com.pactera.empty.base.utils.ScreenUtils;
 import com.pactera.empty.base.dialog.LoadingDialog;
 import com.pactera.empty.base.utils.ToastUtils;
@@ -43,7 +44,7 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
 
     protected Context context;
 
-    public abstract void initView(Bundle savedInstanceState);
+    public abstract void initView();
 
     protected V viewBinding;
 
@@ -77,7 +78,7 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView(savedInstanceState);
+        initView();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

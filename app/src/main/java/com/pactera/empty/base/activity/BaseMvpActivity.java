@@ -2,13 +2,11 @@ package com.pactera.empty.base.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-
-import com.classic.common.MultipleStatusView;
 import com.pactera.empty.R;
-import com.pactera.empty.base.mvp.BaseModel;
 import com.pactera.empty.base.mvp.BasePresenter;
 import com.pactera.empty.base.mvp.BaseView;
 import com.pactera.empty.base.utils.ToastUtils;
+import com.sum.multiple.MultipleStatusView;
 
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
