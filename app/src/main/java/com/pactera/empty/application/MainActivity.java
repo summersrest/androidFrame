@@ -15,6 +15,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     @Override
     public void initView(Bundle savedInstanceState) {
 
+
     }
 
 
