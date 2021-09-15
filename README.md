@@ -1,12 +1,12 @@
 # android 快速开发框架
-### [kotlin版本源码戳这里](https://github.com/liujiang5/AndroidFrameKotlin)
-### [kotlin版本源码戳这里](https://github.com/liujiang5/AndroidFrameKotlin)
-### [kotlin版本源码戳这里](https://github.com/liujiang5/AndroidFrameKotlin)
+### [kotlin版本源码戳这里](https://github.com/summersrest/AndroidFrameKotlin)
+### [kotlin版本源码戳这里](https://github.com/summersrest/AndroidFrameKotlin)
+### [kotlin版本源码戳这里](https://github.com/summersrest/AndroidFrameKotlin)
 该框架旨在帮助开发者快速快速完成一个APP，封装了网络请求，弹窗，加载布局，权限申请，标题栏，广播，常用控件，工具类等。向开发者提供一套快速化，流程化，标准化的开发框架，避免在开发中重复造轮子，同时规避一些新手在开发中常见的纰漏。
 
-> 如果您想构建一个新的项目，直接将整个工程clone下来。然后删除.git文件，修改项目包名，应用名，应用图标，然后您就可以在该框架的基础上进行快速开发。你可参考[Wiki](https://github.com/summerrest/androidFrame/wiki)快速掌握此框架的使用方法
+> 如果您想构建一个新的项目，直接将整个工程clone下来。然后删除.git文件，修改项目包名，应用名，应用图标，然后您就可以在该框架的基础上进行快速开发。你可参考[Wiki](https://github.com/summersrest/androidFrame/wiki)快速掌握此框架的使用方法
 
-[查看Wiki请戳这里](https://github.com/summerrest/androidFrame/wiki)
+[查看Wiki请戳这里](https://github.com/summersrest/androidFrame/wiki)
 
 > 网络请求  
 弹窗视图  
@@ -36,6 +36,3 @@ Adapter
 7、[SimpleAdapter](https://github.com/summersrest/SimpleAdapter)
 
 8、[SimpleRecyclerView](https://github.com/summersrest/simple_recycler_view)
-
-# author
-By **BG9_PTJ_IND_Dev_WF**
