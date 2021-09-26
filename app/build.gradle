@@ -46,8 +46,6 @@ dependencies {
     implementation 'com.lzy.net:okgo:3.0.4'
     //fastjson
     implementation 'com.alibaba:fastjson:1.2.73'
-    //多状态View
-    implementation 'com.github.summersrest:MultipleStatusView:v1.0.0'
     //eventbus
     implementation 'org.greenrobot:eventbus:3.2.0'
     //沉浸式状态栏
@@ -56,6 +54,10 @@ dependencies {
     implementation 'com.github.summersrest:simple_recycler_view:v1.0.0'
     //adapter封装
     implementation 'com.github.summersrest:SimpleAdapter:v1.0.2'
+    //多状态View
+    implementation 'com.github.summersrest:MultipleStatusView:v1.0.0'
+    //titleBar
+    implementation 'com.github.summersrest:TitleBar:v1.0.5'
     //rxjava
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
