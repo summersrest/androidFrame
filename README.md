@@ -37,5 +37,9 @@ Adapter
 
 8、[SimpleRecyclerView](https://github.com/summersrest/simple_recycler_view)
 
+9、[MultipleStatusView](https://github.com/summersrest/MultipleStatusView)
+
+10、[TitleBar](https://github.com/summersrest/TitleBar)
+
 # author
 By **BG9_PTJ_IND_Dev_WF**
