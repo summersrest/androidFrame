@@ -7,7 +7,7 @@ android {
     buildToolsVersion '30.0.3'
 
     defaultConfig {
-        applicationId "com.pactera.empty"
+        applicationId "com.sum.frame"
         minSdk 24
         targetSdk 30
         versionCode 1
