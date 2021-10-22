@@ -7,49 +7,31 @@ import java.io.Serializable;
  * Desc: json解析对象
  */
 public class BasePojo<T> implements Serializable {
-    private boolean success;
-    private int code;
-    private T result;
-    private String message;
-    private long timestamp;
+    private int errorCode;
+    private T data;
+    private String errorMsg;
 
-    public boolean isSuccess() {
-        return success;
+    public int getErrorCode() {
+        return errorCode;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public int getCode() {
-        return code;
+    public T getData() {
+        return data;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setData(T data) {
+        this.data = data;
     }
 
-    public T getResult() {
-        return result;
+    public String getErrorMsg() {
+        return errorMsg;
     }
 
-    public void setResult(T result) {
-        this.result = result;
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-} 
+}

@@ -3,6 +3,7 @@ package com.pactera.empty.base.activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import com.pactera.empty.R;
+import com.pactera.empty.base.http.HttpUtils;
 import com.pactera.empty.base.mvp.BasePresenter;
 import com.pactera.empty.base.mvp.BaseView;
 import com.pactera.empty.base.utils.ToastUtils;
@@ -128,4 +129,15 @@ public abstract class BaseMvpActivity<V extends ViewBinding, P extends BasePrese
         getMultipleStatusView().showEmpty();
     }
 
-} 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //取消网络请求
+        HttpUtils.instance().cancelByTag(context);
+        //断开presenter链接，防止内存泄漏
+        if (null != presenter) {
+            presenter.detach();
+            presenter = null;
+        }
+    }
+}

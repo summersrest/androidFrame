@@ -1,6 +1,9 @@
 package com.pactera.empty.base.http;
 
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.AbsCallback;
+import com.pactera.empty.base.utils.Config;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +13,13 @@ import java.util.Map;
  * Desc:网络请求
  */
 public class HttpUtils {
-    private Map<String, Object> parameter = new HashMap<>();
+    private final Map<String, Object> parameter = new HashMap<>();
 
     private Object body;
+
+    private Object tag;
+
+    private String url;
 
     private HttpUtils() {
     }
@@ -30,48 +37,70 @@ public class HttpUtils {
         return httpUtils;
     }
 
-    public void setParameter(String key, String value) {
+    public HttpUtils setParameter(String key, String value) {
         parameter.put(key, value);
+        return this;
     }
 
-    public void setParameter(String key, Integer value) {
+    public HttpUtils setParameter(String key, Integer value) {
         parameter.put(key, value);
+        return this;
     }
 
-    public void setParameter(String key, Long value) {
+    public HttpUtils setParameter(String key, Long value) {
         parameter.put(key, value);
+        return this;
     }
 
-    public void setParameter(String key, Float value) {
+    public HttpUtils setParameter(String key, Float value) {
         parameter.put(key, value);
+        return this;
     }
 
-    public void setParameter(String key, Boolean value) {
+    public HttpUtils setParameter(String key, Boolean value) {
         parameter.put(key, value);
+        return this;
     }
 
-    public void setParameter(String key, File value) {
+    public HttpUtils setParameter(String key, File value) {
         parameter.put(key, value);
+        return this;
     }
 
-    public void setBody(Object body){
+    public HttpUtils setBody(Object body){
         this.body = body;
+        return this;
+    }
+
+    public HttpUtils tag(Object tag) {
+        this.tag = tag;
+        return this;
+    }
+
+    public HttpUtils url(String url) {
+        this.url = getBaseUrl(url);
+        return this;
+    }
+
+    private String getBaseUrl(String url) {
+//        return Config.BASE_SERVICE + url;
+        return url;
     }
 
     public void clearParameter() {
         parameter.clear();
         body = null;
+        tag = null;
+        url = "";
     }
 
     /**
      * get请求
-     * @param tag
-     * @param url
      * @param jsonCallback
      * @param <T>
      * @return
      */
-    public <T> T getRequest(Object tag, String url, JsonCallback<T> jsonCallback) {
+    public <T> T getRequest(JsonCallback<T> jsonCallback) {
         setCommonParameter();
         new Okgo().getRequest(tag, url, parameter, jsonCallback);
         clearParameter();
@@ -80,13 +109,11 @@ public class HttpUtils {
 
     /**
      * post请求
-     * @param tag
-     * @param url
      * @param jsonCallback
      * @param <T>
      * @return
      */
-    public <T> T postRequest(Object tag, String url, JsonCallback<T> jsonCallback) {
+    public <T> T postRequest(AbsCallback<T> jsonCallback) {
         setCommonParameter();
         new Okgo().postRequest(tag, url, parameter, body, jsonCallback);
         clearParameter();
@@ -95,13 +122,11 @@ public class HttpUtils {
 
     /**
      * put请求
-     * @param tag
-     * @param url
      * @param jsonCallback
      * @param <T>
      * @return
      */
-    public <T> T putRequest(Object tag, String url, JsonCallback<T> jsonCallback) {
+    public <T> T putRequest(AbsCallback<T> jsonCallback) {
         setCommonParameter();
         new Okgo().putRequest(tag, url, parameter, body, jsonCallback);
         clearParameter();
@@ -129,7 +154,7 @@ public class HttpUtils {
      * 球销某一个网络请求
      * @param tag
      */
-    public void cancelTag(Object tag) {
+    public void cancelByTag(Object tag) {
         //取消所有请求
         OkGo.getInstance().cancelTag(tag);
     }

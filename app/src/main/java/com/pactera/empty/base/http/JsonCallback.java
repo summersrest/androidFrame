@@ -25,16 +25,16 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         BasePojo<T> pojo = JSON.parseObject(content, new TypeReference<BasePojo<T>>() {
         });
         response.close();
-        if (null != pojo && pojo.getCode() == 200) {
+        if (null != pojo && pojo.getErrorCode() == 0) {
             if (type == String.class || type == Integer.class || type == Boolean.class|| type == Double.class|| type == Float.class)
-                return pojo.getResult();
+                return pojo.getData();
             try {
-                return JSON.parseObject(pojo.getResult().toString(), type);
+                return JSON.parseObject(pojo.getData().toString(), type);
             } catch(Exception exception) {
-                return pojo.getResult();
+                return pojo.getData();
             }
-        } else if (null != pojo && pojo.getCode() != 200) {
-            throw new IllegalStateException(pojo.getMessage());
+        } else if (null != pojo && pojo.getErrorCode() != 0) {
+            throw new IllegalStateException(pojo.getErrorMsg());
         } else {
             throw new IllegalStateException("服务端接口错误");
         }

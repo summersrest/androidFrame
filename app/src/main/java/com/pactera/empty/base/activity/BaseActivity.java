@@ -41,9 +41,9 @@ import static com.pactera.empty.base.utils.FastDoubleClick.isFastDoubleClick;
 public abstract class BaseActivity<V extends ViewBinding> extends PermissionActivity implements View.OnClickListener {
     private LoadingDialog loadDialog = null;
 
-    protected abstract void initView(Bundle savedInstanceState);
-
     protected abstract V getViewBinding();
+
+    protected abstract void initView(Bundle savedInstanceState);
 
     protected V viewBinding;
 
@@ -135,29 +135,6 @@ public abstract class BaseActivity<V extends ViewBinding> extends PermissionActi
                 .statusBarColor(R.color.app_color)//使用该属性,必须指定状态栏颜色
                 .autoStatusBarDarkModeEnable(true,0.2f)
                 .init();
-
-    }
-
-    /**
-     * 设置标题栏
-     * @param titleLayout
-     * @param title
-     */
-    protected void setTitle(RelativeLayout titleLayout, String title) {
-        //返回按钮
-        LinearLayout backBtn = titleLayout.findViewById(R.id.btn_back);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onActivityFinish();
-            }
-        });
-        //标题
-        TextView titleTv = titleLayout.findViewById(R.id.tv_title);
-        titleTv.setText(title);
-        //右侧按钮
-        TextView actionTv = titleLayout.findViewById(R.id.tv_action);
-        actionTv.setVisibility(View.GONE);
 
     }
 

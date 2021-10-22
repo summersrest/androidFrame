@@ -44,11 +44,12 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
 
     protected Context context;
 
-    public abstract void initView();
+    protected abstract V getViewBinding();
 
     protected V viewBinding;
 
-    protected abstract V getViewBinding();
+    public abstract void initView();
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

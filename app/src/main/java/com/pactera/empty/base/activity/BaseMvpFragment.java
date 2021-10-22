@@ -13,6 +13,7 @@ import com.sum.multiple.MultipleStatusView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
 
 /**
@@ -23,6 +24,8 @@ public abstract class BaseMvpFragment<V extends ViewBinding, P extends BasePrese
     protected P presenter;
 
     public abstract P createPresenter();
+
+    public abstract void initView();
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         presenter = createPresenter();
@@ -134,7 +137,13 @@ public abstract class BaseMvpFragment<V extends ViewBinding, P extends BasePrese
     @Override
     public void onDestroy() {
         super.onDestroy();
-        HttpUtils.instance().cancelTag(context);
+        //取消网络请求
+        HttpUtils.instance().cancelByTag(this);
+        //断开presenter链接，防止内存泄漏
+        if (null != presenter) {
+            presenter.detach();
+            presenter = null;
+        }
     }
 }
 
