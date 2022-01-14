@@ -7,6 +7,7 @@ import com.sum.frame.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
+
     @Override
     protected ActivityMainBinding getViewBinding() {
         return ActivityMainBinding.inflate(getLayoutInflater());
@@ -16,6 +17,5 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     protected void initView(Bundle savedInstanceState) {
 
     }
-
 
 }
