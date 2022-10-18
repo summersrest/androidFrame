@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 public class LoadingDialog extends AlertDialog {
     private TextView tips_loading_msg;
 
+
     private String message = null;
 
     public LoadingDialog(Context context, String message) {
