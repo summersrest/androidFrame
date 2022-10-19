@@ -1,8 +1,11 @@
 package com.sum.frame.base.utils;
 
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.widget.Toast;
 
-import com.sum.frame.base.App;
+import com.sum.frame.R;
+
 
 /**
  * @author liujiang
@@ -22,8 +25,10 @@ public class ToastUtils {
      * @param message
      */
     public static void showShort(CharSequence message) {
-        if (isShow)
-            Toast.makeText(App.instance().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        if (isShow) {
+            show(message, Toast.LENGTH_LONG);
+        }
+
     }
 
     /**
@@ -32,8 +37,10 @@ public class ToastUtils {
      * @param message
      */
     public static void showLong(CharSequence message) {
-        if (isShow)
-            Toast.makeText(App.instance().getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        if (isShow) {
+            show(message, Toast.LENGTH_LONG);
+        }
+
     }
 
     /**
@@ -43,7 +50,10 @@ public class ToastUtils {
      * @param duration
      */
     public static void show(CharSequence message, int duration) {
-        if (isShow)
-            Toast.makeText(App.instance().getApplicationContext(), message, duration).show();
+        if (isShow && !TextUtils.isEmpty(message)) {
+            com.hjq.toast.ToastUtils.setView(R.layout.view_toast_layout);
+            com.hjq.toast.ToastUtils.setGravity(Gravity.BOTTOM, 0, ScreenUtils.getScreenHeight() / 12);
+            com.hjq.toast.ToastUtils.delayedShow(message, 200);
+        }
     }
 } 
