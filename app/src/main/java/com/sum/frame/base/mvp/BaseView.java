@@ -11,6 +11,8 @@ public interface BaseView {
 
     void showProgressDialog(String msg);
 
+    void updateProgressText(String msg);
+
     void hideProgressDialog();
 
     void hideProgressDialog(String msg);

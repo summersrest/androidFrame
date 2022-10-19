@@ -69,6 +69,16 @@ public abstract class BaseMvpFragment<V extends ViewBinding, P extends BasePrese
     }
 
     /**
+     * 更新进度条文字
+     *
+     * @param msg
+     */
+    @Override
+    public void updateProgressText(String msg) {
+        setDialogText(msg);
+    }
+
+    /**
      * 隐藏进度条弹窗
      */
     @Override

@@ -1,11 +1,13 @@
 package com.sum.frame.base.utils;
 
+import com.sum.frame.BuildConfig;
+
 /**
  * @author liujiang
  * Desc: 网络请求地址
  */
 public class Config {
-    public static final String BASE_SERVICE = "http://127.0.0.1:8080/";    //开发环境
+    public static final String BASE_SERVICE = BuildConfig.BASE_URL;    //开发环境
 
     public static final String SERVER_HOME = BASE_SERVICE + "";
 

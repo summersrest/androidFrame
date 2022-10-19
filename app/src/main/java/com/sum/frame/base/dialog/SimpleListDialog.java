@@ -1,9 +1,11 @@
 package com.sum.frame.base.dialog;
 
 import android.content.Context;
+
 import com.lxj.xpopup.XPopup;
 import com.sum.frame.base.dialog.formatter.TextFormatter;
 import com.sum.frame.base.interfaces.OnDialogItemSelectedListener;
+
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +29,13 @@ public class SimpleListDialog<T> {
     private boolean isDarkTheme;
     private boolean isDismissOnBackPressed = true;
     private boolean isDismissOnTouchOutside = true;
+    private int maxHeight;
+    private int maxWidth;
 
-    private SimpleListDialog(Context context) {
+    public SimpleListDialog(Context context) {
         this.context = context;
         this.title = "请选择";
 
-    }
-
-    public static <T> SimpleListDialog<T> builder(Context context) {
-        SoftReference<SimpleListDialog<T>> softReference = new SoftReference<>(new SimpleListDialog<T>(context));
-        return (SimpleListDialog<T>) softReference.get();
     }
 
     public SimpleListDialog<T> setTitle(String title) {
@@ -86,9 +85,20 @@ public class SimpleListDialog<T> {
     }
 
     public SimpleListDialog<T> setDismissOnTouchOutside(boolean dismissOnTouchOutside) {
-        isDismissOnTouchOutside = dismissOnTouchOutside;
+        this.isDismissOnTouchOutside = dismissOnTouchOutside;
         return this;
     }
+
+    public SimpleListDialog<T> setMaxHeight(int maxHeight) {
+        this.maxHeight = maxHeight;
+        return this;
+    }
+
+    public SimpleListDialog<T> setMaxWidth(int maxWidth) {
+        this.maxWidth = maxWidth;
+        return this;
+    }
+
 
     public void show() {
         String[] arr = new String[data.size()];
@@ -123,6 +133,8 @@ public class SimpleListDialog<T> {
         }
         if (align == ALIGN_BOTTOM) {
             new XPopup.Builder(context)
+                    .maxHeight(maxHeight)
+                    .maxWidth(maxWidth)
                     .dismissOnBackPressed(isDismissOnBackPressed)
                     .dismissOnTouchOutside(isDismissOnTouchOutside)
                     .isDarkTheme(isDarkTheme)
@@ -136,6 +148,8 @@ public class SimpleListDialog<T> {
         } else if (align == ALIGN_CENTER) {
             new XPopup.Builder(context)
                     .isDarkTheme(isDarkTheme)
+                    .maxHeight(maxHeight)
+                    .maxWidth(maxWidth)
                     .dismissOnBackPressed(isDismissOnBackPressed)
                     .dismissOnTouchOutside(isDismissOnTouchOutside)
                     .asCenterList(title, arr, iconIds, checkedPosition, (position, text) -> {

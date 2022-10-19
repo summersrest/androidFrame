@@ -1,5 +1,6 @@
 package com.sum.frame.base.utils;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
@@ -68,5 +69,10 @@ public class WorkUtils {
             }
         }
         return false;
+    }
+
+    public static int dp2px(Context context, float dipValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
     }
 } 

@@ -2,6 +2,7 @@ package com.sum.frame.base.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import com.sum.frame.R;
 import com.sum.frame.base.http.HttpUtils;
 import com.sum.frame.base.mvp.BasePresenter;
@@ -65,6 +66,16 @@ public abstract class BaseMvpActivity<V extends ViewBinding, P extends BasePrese
     public void showProgressDialog(String msg) {
         if (!TextUtils.isEmpty(msg))
             showDialog(msg);
+    }
+
+    /**
+     * 更新进度条文字
+     *
+     * @param msg
+     */
+    @Override
+    public void updateProgressText(String msg) {
+        setDialogText(msg);
     }
 
     /**

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
  * @author liujiang
  * Desc:加载弹窗
  */
+@Deprecated
 public class LoadingDialog extends AlertDialog {
     private TextView tips_loading_msg;
 

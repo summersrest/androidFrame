@@ -1,23 +1,13 @@
 package com.sum.frame.base.activity;
 
+import static com.sum.frame.base.utils.FastDoubleClick.isFastDoubleClick;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.RelativeLayout;
-
-import com.sum.frame.R;
-import com.sum.frame.base.pojo.EventMessage;
-import com.sum.frame.base.utils.ScreenUtils;
-import com.sum.frame.base.dialog.LoadingDialog;
-import com.sum.frame.base.utils.ToastUtils;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,14 +15,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
 
-import static com.sum.frame.base.utils.FastDoubleClick.isFastDoubleClick;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.impl.LoadingPopupView;
+import com.sum.frame.R;
+import com.sum.frame.base.pojo.EventMessage;
+import com.sum.frame.base.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * @author liujiang
  * Desc:基类
  */
 public abstract class BaseFragment<V extends ViewBinding> extends Fragment implements View.OnClickListener {
-    private LoadingDialog loadDialog = null;
+    private LoadingPopupView loadDialog = null;
 
     protected AppCompatActivity activity;
 
@@ -102,6 +100,16 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     }
 
     /**
+     * 改变弹窗文字
+     * @param text
+     */
+    protected void setDialogText(String text) {
+        if (loadDialog != null) {
+            loadDialog.setTitle(null == text ? "" : text);
+        }
+    }
+
+    /**
      * 隐藏进度条弹窗
      *
      * @param msg
@@ -111,7 +119,7 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
             ToastUtils.showShort(msg);
         // 取消加载对话框
         if (loadDialog != null) {
-            loadDialog.cancel();
+            loadDialog.dismiss();
             loadDialog = null;
         }
     }
@@ -122,16 +130,16 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     private void setDialog(String text) {
         // 正在加载对话框
         if (loadDialog == null) {
-            loadDialog = new LoadingDialog(getActivity(), text);
+            loadDialog = (LoadingPopupView) new XPopup.Builder(getActivity())
+                    .dismissOnBackPressed(false)
+                    .dismissOnTouchOutside(false)
+                    .isLightNavigationBar(true)
+                    .isViewMode(true)
+                    .asLoading(text)
+                    .show();
         } else {
-            loadDialog.setText(text);
+            loadDialog.show();
         }
-        loadDialog.getWindow().setDimAmount(0.4f);
-        loadDialog.show();
-        WindowManager.LayoutParams params = loadDialog.getWindow().getAttributes();
-        params.width = ScreenUtils.getScreenWidth() / 2;
-        params.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
-        loadDialog.getWindow().setAttributes(params);
     }
 
     @Override
