@@ -179,7 +179,6 @@ public abstract class BaseActivity<V extends ViewBinding> extends AppCompatActiv
                     .dismissOnBackPressed(false)
                     .dismissOnTouchOutside(false)
                     .isLightNavigationBar(true)
-                    .isViewMode(true)
                     .asLoading(text)
                     .show();
         } else {

@@ -15,11 +15,6 @@ import com.sum.frame.base.App;
  * Desc:获得屏幕相关的辅助类
  */
 public class ScreenUtils {
-    private ScreenUtils() {
-        /* cannot be instantiated */
-        throw new UnsupportedOperationException("cannot be instantiated");
-    }
-
     /**
      * 获得屏幕高度
      *
@@ -47,6 +42,30 @@ public class ScreenUtils {
         wm.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.heightPixels;
     }
+    /**
+     * 获得屏幕实际宽度
+     *
+     * @param
+     * @return
+     */
+    public static int getRealScreenWidth(Activity activity) {
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getRealMetrics(outMetrics);
+        return outMetrics.widthPixels;
+    }
+
+    /**
+     * 获得屏幕实际高端
+     *
+     * @param
+     * @return
+     */
+    public static int getRealScreenHeight(Activity activity) {
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getRealMetrics(outMetrics);
+        return outMetrics.heightPixels;
+    }
+
 
     /**
      * 获得状态栏的高度

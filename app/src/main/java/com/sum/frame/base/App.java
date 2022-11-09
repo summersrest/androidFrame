@@ -1,6 +1,8 @@
 package com.sum.frame.base;
 
 import android.app.Application;
+
+import com.hjq.toast.ToastUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -27,6 +29,8 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         initOkHttp();
+        // 初始化 Toast 框架
+        ToastUtils.init(this);
     }
 
     /**

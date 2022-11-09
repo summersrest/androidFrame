@@ -134,7 +134,6 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
                     .dismissOnBackPressed(false)
                     .dismissOnTouchOutside(false)
                     .isLightNavigationBar(true)
-                    .isViewMode(true)
                     .asLoading(text)
                     .show();
         } else {
