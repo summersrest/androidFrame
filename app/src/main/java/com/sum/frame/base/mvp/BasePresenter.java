@@ -34,5 +34,7 @@ public abstract class BasePresenter<M extends BaseModel, V extends BaseView> {
     public void detach() {
         listener = null;
         model = null;
+        context = null;
+        fragment = null;
     }
 }
