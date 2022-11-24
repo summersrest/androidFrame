@@ -7,16 +7,16 @@ import java.io.Serializable;
  * Desc: json解析对象
  */
 public class BasePojo<T> implements Serializable {
-    private int errorCode;
+    private int error;
     private T data;
-    private String errorMsg;
+    private String message;
 
-    public int getErrorCode() {
-        return errorCode;
+    public int getError() {
+        return error;
     }
 
-    public void setErrorCode(int errorCode) {
-        this.errorCode = errorCode;
+    public void setError(int error) {
+        this.error = error;
     }
 
     public T getData() {
@@ -27,11 +27,11 @@ public class BasePojo<T> implements Serializable {
         this.data = data;
     }
 
-    public String getErrorMsg() {
-        return errorMsg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
