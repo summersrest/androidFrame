@@ -23,7 +23,7 @@ public class HttpUtils {
     private HttpUtils() {
     }
 
-    private static HttpUtils httpUtils;
+    private volatile static HttpUtils httpUtils;
 
     public static HttpUtils instance() {
         if (httpUtils == null) {
